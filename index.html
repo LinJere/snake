@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		canvas{
+			border:1px solid red;
+			display: block;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400">canvas是H5新标签，当前浏览器不支持，请更换</canvas>
+	<script type="text/javascript" src="./lib/rect.js"></script>
+	<script type="text/javascript" src="./lib/snake4.js"></script>
+	<script type="text/javascript">
+		// 1. 找到所需的标签元素
+		var canvas = document.querySelector("canvas");
+		// 2. 获取得到绘制所需的上下文环境
+		var ctx = canvas.getContext("2d");
+		// 3. 根据Snake构造函数，去创建出一个Snake实例对象
+		var snake = new Snake({
+			len:4,
+			wh:20,
+			fillStyle:"gray",
+			strokeStyle:"blue"
+		});
+		// 4. 有了snake对象后，调用start方法，实现对应的绘制
+		snake.draw(ctx,canvas);
+		// 5. 使得小蛇动起来
+		snake.run(ctx,canvas);
+		document.onkeydown = function(e){
+			// 直接调用snake对象中changeDir方法，去实现移动方向的修改
+			snake.changeDir(e.keyCode);
+		}
+	</script>
+</body>
+</html>
